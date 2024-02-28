@@ -1,0 +1,22 @@
+services:
+  schedule:
+    build:
+      context: .
+    image: schedule
+    container_name: schedule
+    network_mode: host
+    ports:
+      - "3001:3001"
+    volumes:
+      - ${PWD}/config.toml:/config.toml:ro
+volumes:
+  schedule:
+    driver: local
+    name: schedule
+    driver_opts:
+      type: none
+      device: ${PWD}/config.toml
+      o: bind
+networks:
+  default:
+    driver: host
